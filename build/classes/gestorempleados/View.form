@@ -23,51 +23,59 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="22" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel1" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="Tf_salary" min="-2" pref="204" max="-2" attributes="0"/>
-                                      <Component id="Tf_department" min="-2" pref="204" max="-2" attributes="0"/>
-                                      <Component id="Tf_name" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="Bt_insert" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="Cbox_order" min="-2" pref="113" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="Bt_order" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Component id="jScrollPane1" min="-2" pref="477" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="Bt_hire" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="Bt_dismiss" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="Bt_consult" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="Bt_exist" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" alignment="0" pref="477" max="32767" attributes="0"/>
+                      <Component id="Lb_error" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="Bt_hire" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="Bt_dismiss" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="Bt_consult" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="Bt_exist" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel2" min="-2" pref="185" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="Tf_department" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Tf_salary" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="Cbox_order" min="-2" pref="113" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="Bt_order" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jLabel1" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                                              <Component id="Tf_code" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel2" min="-2" pref="114" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Tf_name" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,39 +83,44 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jLabel1" min="-2" pref="44" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Tf_code" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Tf_name" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Tf_department" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Tf_department" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Tf_salary" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="Bt_insert" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Cbox_order" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Cbox_order" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Bt_order" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="312" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="316" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Bt_hire" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Bt_dismiss" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Bt_exist" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Bt_consult" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Bt_exist" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="Lb_error" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -202,14 +215,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Bt_consultActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Bt_insert">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Insertar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Bt_insertActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JComboBox" name="Cbox_order">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -226,6 +231,18 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Lb_error">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel6"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C&#xf3;digo Empleado:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="Tf_code">
     </Component>
   </SubComponents>
 </Form>

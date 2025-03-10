@@ -4,20 +4,38 @@
  */
 package gestorempleados;
 
+import java.io.FileNotFoundException;
+import javax.swing.JTextField;
+
 /**
  *
  * @author amjpa
  */
 public class View extends javax.swing.JFrame {
 
+    EmployeeManagement EM;
     /**
      * Creates new form View
      */
     public View() {
+        
+        try {
+            EM = new EmployeeManagement();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: No se pudo cargar el archivo de empleados.");
+        }
+        
         initComponents();
+        
     }
+
+    public JTextField getTf_salary() {
+        return Tf_salary;
+    }
+
     
-    EmployeeManagement EM = new EmployeeManagement();
+    
+    Employee employee = new Employee();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,8 +61,10 @@ public class View extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Bt_order = new javax.swing.JButton();
         Bt_consult = new javax.swing.JButton();
-        Bt_insert = new javax.swing.JButton();
         Cbox_order = new javax.swing.JComboBox<>();
+        Lb_error = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        Tf_code = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,13 +118,6 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        Bt_insert.setText("Insertar");
-        Bt_insert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Bt_insertActionPerformed(evt);
-            }
-        });
-
         Cbox_order.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Salario", "Departamento" }));
         Cbox_order.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,86 +125,96 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        Lb_error.setText("jLabel6");
+
+        jLabel6.setText("Código Empleado:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(44, 44, 44)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(Tf_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Tf_department, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Bt_insert)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Cbox_order, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Bt_order))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Bt_hire)
-                                .addGap(35, 35, 35)
-                                .addComponent(Bt_dismiss)
-                                .addGap(40, 40, 40)
-                                .addComponent(Bt_consult)
-                                .addGap(95, 95, 95)
-                                .addComponent(Bt_exist)))
-                        .addGap(26, 26, 26))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                        .addComponent(Lb_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(Bt_hire)
+                            .addGap(38, 38, 38)
+                            .addComponent(Bt_dismiss)
+                            .addGap(33, 33, 33)
+                            .addComponent(Bt_consult)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Bt_exist))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4))
+                                    .addGap(44, 44, 44)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Tf_department)
+                                        .addComponent(Tf_salary)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(Cbox_order, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(Bt_order))
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(Tf_code, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(0, 2, Short.MAX_VALUE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(Tf_name)))
+                            .addGap(0, 0, Short.MAX_VALUE))))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(Tf_code, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(Tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(Tf_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(Tf_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(Bt_insert)
-                .addGap(19, 19, 19)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cbox_order, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
+                    .addComponent(Cbox_order, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Bt_order))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Bt_hire)
                     .addComponent(Bt_dismiss)
-                    .addComponent(Bt_exist)
-                    .addComponent(Bt_consult))
-                .addGap(40, 40, 40))
+                    .addComponent(Bt_consult)
+                    .addComponent(Bt_exist))
+                .addGap(18, 18, 18)
+                .addComponent(Lb_error)
+                .addGap(37, 37, 37))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void Bt_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_insertActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Bt_insertActionPerformed
 
     private void Cbox_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbox_orderActionPerformed
         // TODO add your handling code here:
@@ -202,7 +225,37 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_Bt_orderActionPerformed
 
     private void Bt_hireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_hireActionPerformed
-        // TODO add your handling code here:
+
+        //Obtengo los valores de los TFields
+        int code = 0;
+        String name = Tf_name.getText();
+        String department = Tf_department.getText();
+        double salary = 0.0;
+
+        try {
+            salary = Double.parseDouble(Tf_salary.getText());
+            code = Integer.parseInt(Tf_code.getText());
+
+        } catch (NumberFormatException e) {
+            Lb_error.setText("Error: El salario debe ser un número.");
+            return;
+        }
+
+        String result = EM.crearEmpleado(code, name, salary, department);
+
+        Lb_error.setText(result);
+
+        // Limpiar los campos de entrada solo si la operación fue exitosa
+        if (result.equals("Empleado agregado correctamente")) {
+            Tf_name.setText("");
+            Tf_department.setText("");
+            Tf_salary.setText("");
+            Tf_code.setText("");
+        }
+
+        //Llamada al método crear, para contratar un nuevo empleado.
+        // Bt_hire.setText(EM.crearEmpleado(employee.getName(), employee.getSalary(), employee.getDepartment()));
+
     }//GEN-LAST:event_Bt_hireActionPerformed
 
     private void Bt_dismissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_dismissActionPerformed
@@ -210,10 +263,15 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_Bt_dismissActionPerformed
 
     private void Bt_consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_consultActionPerformed
-        // TODO add your handling code here:
+        
+        //Lamada al método de listar para obtener una lista de los empleados por textArea.
+        Ta_txtArea.setText(EM.list());
+        
+        
     }//GEN-LAST:event_Bt_consultActionPerformed
 
     private void Bt_existActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_existActionPerformed
+        
         //Llamada al método salir para cerrar la ventana. 
         EM.salir();
     }//GEN-LAST:event_Bt_existActionPerformed
@@ -258,10 +316,11 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JButton Bt_dismiss;
     private javax.swing.JButton Bt_exist;
     private javax.swing.JButton Bt_hire;
-    private javax.swing.JButton Bt_insert;
     private javax.swing.JButton Bt_order;
     private javax.swing.JComboBox<String> Cbox_order;
+    private javax.swing.JLabel Lb_error;
     private javax.swing.JTextArea Ta_txtArea;
+    private javax.swing.JTextField Tf_code;
     private javax.swing.JTextField Tf_department;
     private javax.swing.JTextField Tf_name;
     private javax.swing.JTextField Tf_salary;
@@ -270,6 +329,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
