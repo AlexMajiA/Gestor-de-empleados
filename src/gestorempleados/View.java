@@ -16,6 +16,8 @@ public class View extends javax.swing.JFrame {
     public View() {
         initComponents();
     }
+    
+    EmployeeManagement EM = new EmployeeManagement();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,24 +58,59 @@ public class View extends javax.swing.JFrame {
         jLabel4.setText("Salario");
 
         Bt_hire.setText("Contratar");
+        Bt_hire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_hireActionPerformed(evt);
+            }
+        });
 
         Bt_dismiss.setText("Despedir");
+        Bt_dismiss.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_dismissActionPerformed(evt);
+            }
+        });
 
         Ta_txtArea.setColumns(20);
         Ta_txtArea.setRows(5);
         jScrollPane1.setViewportView(Ta_txtArea);
 
         Bt_exist.setText("Salir");
+        Bt_exist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_existActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Ordenar por:");
 
         Bt_order.setText("Ordenar");
+        Bt_order.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_orderActionPerformed(evt);
+            }
+        });
 
         Bt_consult.setText("Consultar");
+        Bt_consult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_consultActionPerformed(evt);
+            }
+        });
 
         Bt_insert.setText("Insertar");
+        Bt_insert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_insertActionPerformed(evt);
+            }
+        });
 
         Cbox_order.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Salario", "Departamento" }));
+        Cbox_order.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cbox_orderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,6 +188,35 @@ public class View extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Bt_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_insertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Bt_insertActionPerformed
+
+    private void Cbox_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbox_orderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Cbox_orderActionPerformed
+
+    private void Bt_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_orderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Bt_orderActionPerformed
+
+    private void Bt_hireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_hireActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Bt_hireActionPerformed
+
+    private void Bt_dismissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_dismissActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Bt_dismissActionPerformed
+
+    private void Bt_consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_consultActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Bt_consultActionPerformed
+
+    private void Bt_existActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_existActionPerformed
+        //Llamada al método salir para cerrar la ventana. 
+        EM.salir();
+    }//GEN-LAST:event_Bt_existActionPerformed
 
     /**
      * @param args the command line arguments

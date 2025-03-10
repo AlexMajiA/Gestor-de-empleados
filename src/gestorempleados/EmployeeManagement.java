@@ -10,4 +10,15 @@ package gestorempleados;
  */
 public class EmployeeManagement {
     
+    
+    public void salir(){
+        System.exit(0);
+    }
+    
+    
+    
+    public void insertar (){
+        
+    }
+    
 }
