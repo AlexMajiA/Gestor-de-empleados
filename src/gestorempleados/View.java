@@ -33,7 +33,7 @@ public class View extends javax.swing.JFrame {
         Bt_hire = new javax.swing.JButton();
         Bt_dismiss = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Ta_txtArea = new javax.swing.JTextArea();
         Tf_name = new javax.swing.JTextField();
         Tf_department = new javax.swing.JTextField();
         Tf_salary = new javax.swing.JTextField();
@@ -42,7 +42,7 @@ public class View extends javax.swing.JFrame {
         Bt_order = new javax.swing.JButton();
         Bt_consult = new javax.swing.JButton();
         Bt_insert = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Cbox_order = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,9 +59,9 @@ public class View extends javax.swing.JFrame {
 
         Bt_dismiss.setText("Despedir");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        Ta_txtArea.setColumns(20);
+        Ta_txtArea.setRows(5);
+        jScrollPane1.setViewportView(Ta_txtArea);
 
         Bt_exist.setText("Salir");
 
@@ -73,7 +73,7 @@ public class View extends javax.swing.JFrame {
 
         Bt_insert.setText("Insertar");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Salario", "Departamento" }));
+        Cbox_order.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Salario", "Departamento" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +98,7 @@ public class View extends javax.swing.JFrame {
                                         .addComponent(Tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(Bt_insert)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Cbox_order, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(Bt_order))))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +135,7 @@ public class View extends javax.swing.JFrame {
                 .addComponent(Bt_insert)
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cbox_order, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(Bt_order))
                 .addGap(18, 18, 18)
@@ -194,16 +194,16 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JButton Bt_hire;
     private javax.swing.JButton Bt_insert;
     private javax.swing.JButton Bt_order;
+    private javax.swing.JComboBox<String> Cbox_order;
+    private javax.swing.JTextArea Ta_txtArea;
     private javax.swing.JTextField Tf_department;
     private javax.swing.JTextField Tf_name;
     private javax.swing.JTextField Tf_salary;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
