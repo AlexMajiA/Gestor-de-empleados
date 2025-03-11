@@ -4,11 +4,14 @@
  */
 package gestorempleados;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,15 +22,34 @@ import java.util.logging.Logger;
  */
 public class EmployeeManagement {
     
+    private static final String URL = "jdbc:postgresql:localhost:5432/employees";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "";
+    
+    public static Connection obtenerConexiConnection (){
+        
+        try {
+            //Establezco la conexión
+            Connection conexion = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Conexion establecida");
+            return conexion;
+            
+            
+        } catch (SQLException e) {
+            System.out.println("Error de conexión: " + e.getMessage());
+            return null;
+        }
+        
+    }
     //Creación de un ArrayList, para guardar los empleados.
     ArrayList<Employee> employeeList = new ArrayList<>();
     
-    final private String archivo = "empleados.dat";
+    //final private String archivo = "empleados.dat";
     
-    public EmployeeManagement() throws FileNotFoundException{
+ /*    public EmployeeManagement() throws FileNotFoundException{
         try {
         
-        File employees = new File(archivo);
+       File employees = new File(archivo);
             
         //Verifico si el archivo no existe y lo creo en caso necesario
         if (!employees.exists()) {
@@ -41,7 +63,7 @@ public class EmployeeManagement {
         //Abro un flujo de entrada para leer el archivo
         FileInputStream inputStream = new FileInputStream(archivo);
         DataInputStream dis = new DataInputStream(inputStream);
-        
+      
         // Crea un objeto auxiliar para almacenar los datos de un producto
         Employee employeeAux = new Employee();
         
@@ -59,9 +81,9 @@ public class EmployeeManagement {
             System.out.println("Error: " + ex.getMessage());
         }  
         
-      return;
+      return; 
     }
-    
+  */   
     //Método para cerrar la aplicación.
     public void salir(){
         System.exit(0);
