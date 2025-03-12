@@ -19,11 +19,7 @@ public class View extends javax.swing.JFrame {
      */
     public View() {
         
-        try {
-            EM = new EmployeeManagement();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: No se pudo cargar el archivo de empleados.");
-        }
+        EM = new EmployeeManagement();
         
         initComponents();
         

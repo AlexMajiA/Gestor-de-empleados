@@ -22,9 +22,9 @@ import java.util.logging.Logger;
  */
 public class EmployeeManagement {
     
-    private static final String URL = "jdbc:postgresql:localhost:5432/employees";
+    private static final String URL = "jdbc:postgresql://localhost:5432/Employees";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "postgre";
     
     public static Connection obtenerConexiConnection (){
         

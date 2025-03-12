@@ -4,6 +4,8 @@
  */
 package gestorempleados;
 
+import java.sql.Connection;
+//import gestorempleados.db.ConexionPostgres;
 /**
  *
  * @author amjpa
@@ -14,7 +16,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        //Prueba de conexión con Postgre
+        Connection conexion = EmployeeManagement.obtenerConexiConnection();
+        if (conexion != null) {
+            System.out.println("Conexion establecida correctamente.");
+        } else {
+            System.out.println("No se pudo conectar a la base de datos Postgre.");
+        }
     }
     
 }
