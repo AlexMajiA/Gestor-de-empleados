@@ -51,32 +51,55 @@ public class EmployeeManagement {
     public String crearEmpleado(int code, String name, double salary, String department) {
         Employee employee = new Employee();
 
-        
         Connection conexion = EmployeeManagement.obtenerConexion();
-        
+
         if (conexion == null) {
             return "La conexión es nula, no se puede insertar empleado.";
-            
-        }else {
-            
+
+        } else {
+
             try {
                 PreparedStatement statement = conexion.prepareStatement(
                         "INSERT INTO Employees (code, name, salary, department) VALUES (?, ?, ?, ?);");
+
+                statement.setInt(1, code);
+                statement.setString(2, name);
+                statement.setDouble(3, salary);
+                statement.setString(4, department);
+
+                int updateRow = statement.executeUpdate();
+
+                if (updateRow > 0) {
+                    employee.setCode(code);
+                    employee.setName(name);
+                    employee.setSalary(salary);
+                    employee.setDepartment(department);
+                    
+                    employeeList.add(employee);
+
+                    return "Filas actualizadas correctamente.";
+                } else {
+                    return "El empleado no se ha insertado correctamente.";
+                }
+
             } catch (SQLException ex) {
                 System.out.println("Error... " + ex.getMessage());
-            }
-                    
-        }
-        
-        if (!name.isEmpty() && !department.isEmpty()) {
-            employee.setCode(code);
-            employee.setName(name);
-            employee.setSalary(salary);
-            employee.setDepartment(department);
+                return "Error al insertar el empleado: " + ex.getMessage();
+            } finally {
 
-            employeeList.add(employee);
+                try {
+                    if (conexion != null) {
+                        conexion.close();
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Error al cerrar la conexión: " + e.getMessage());
+                }
+
+            }
+
         }
-        return employee.toString();
+
+       
     }
 
     

@@ -14,9 +14,10 @@ import javax.swing.JTextField;
 public class View extends javax.swing.JFrame {
 
     EmployeeManagement EM;
-    /**
-     * Creates new form View
-     */
+    
+
+    
+    
     public View() {
         
         EM = new EmployeeManagement();
@@ -229,7 +230,7 @@ public class View extends javax.swing.JFrame {
 
     private void Bt_hireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_hireActionPerformed
 
-        //Obtengo los valores de los TFields
+        //Obtengo los valores de los JTextFields
         int code = 0;
         String name = Tf_name.getText();
         String department = Tf_department.getText();
