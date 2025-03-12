@@ -6,15 +6,12 @@ package gestorempleados;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.postgresql.PGProperty;
 
 /**
  *
@@ -26,14 +23,13 @@ public class EmployeeManagement {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgre";
     
-    public static Connection obtenerConexiConnection (){
+    public static Connection obtenerConexion (){
         
         try {
             //Establezco la conexión
             Connection conexion = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("Conexion establecida");
             return conexion;
-            
             
         } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
@@ -44,46 +40,6 @@ public class EmployeeManagement {
     //Creación de un ArrayList, para guardar los empleados.
     ArrayList<Employee> employeeList = new ArrayList<>();
     
-    //final private String archivo = "empleados.dat";
-    
- /*    public EmployeeManagement() throws FileNotFoundException{
-        try {
-        
-       File employees = new File(archivo);
-            
-        //Verifico si el archivo no existe y lo creo en caso necesario
-        if (!employees.exists()) {
-            try {
-                employees.createNewFile();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-        
-        //Abro un flujo de entrada para leer el archivo
-        FileInputStream inputStream = new FileInputStream(archivo);
-        DataInputStream dis = new DataInputStream(inputStream);
-      
-        // Crea un objeto auxiliar para almacenar los datos de un producto
-        Employee employeeAux = new Employee();
-        
-        
-            // Lee el primer código de producto del archivo
-            while (dis.available() > 0) {                
-                employeeAux.setCode(dis.readInt());
-            }
-            
-            
-            //Cierro el flujo
-            dis.close();
-            
-        } catch (IOException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }  
-        
-      return; 
-    }
-  */   
     //Método para cerrar la aplicación.
     public void salir(){
         System.exit(0);
@@ -95,6 +51,23 @@ public class EmployeeManagement {
     public String crearEmpleado(int code, String name, double salary, String department) {
         Employee employee = new Employee();
 
+        
+        Connection conexion = EmployeeManagement.obtenerConexion();
+        
+        if (conexion == null) {
+            return "La conexión es nula, no se puede insertar empleado.";
+            
+        }else {
+            
+            try {
+                PreparedStatement statement = conexion.prepareStatement(
+                        "INSERT INTO Employees (code, name, salary, department) VALUES (?, ?, ?, ?);");
+            } catch (SQLException ex) {
+                System.out.println("Error... " + ex.getMessage());
+            }
+                    
+        }
+        
         if (!name.isEmpty() && !department.isEmpty()) {
             employee.setCode(code);
             employee.setName(name);
@@ -106,6 +79,9 @@ public class EmployeeManagement {
         return employee.toString();
     }
 
+    
+    
+    
     //Método para listar los empleados existentes.
     public String list() {
         StringBuilder text = new StringBuilder();

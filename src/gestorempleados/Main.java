@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         
         //Prueba de conexión con Postgre
-        Connection conexion = EmployeeManagement.obtenerConexiConnection();
+        Connection conexion = EmployeeManagement.obtenerConexion();
         if (conexion != null) {
             System.out.println("Conexion establecida correctamente.");
         } else {
