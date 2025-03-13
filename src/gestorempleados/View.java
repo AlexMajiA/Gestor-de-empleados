@@ -5,6 +5,9 @@
 package gestorempleados;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
@@ -148,7 +151,7 @@ public class View extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel3)
-                                        .addComponent(jLabel4))
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(44, 44, 44)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(Tf_department)
@@ -182,27 +185,27 @@ public class View extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(Tf_code, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(Tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Tf_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(Tf_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(Lb_error)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(Tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(Tf_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(Tf_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(Lb_error)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Bt_dismiss)
-                            .addComponent(Bt_hire))
-                        .addGap(48, 48, 48)
+                            .addComponent(Bt_hire)
+                            .addComponent(Bt_dismiss))
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(Cbox_order, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,7 +214,7 @@ public class View extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(100, 100, 100))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(444, 444, 444)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Bt_consult)
                             .addComponent(Bt_exist))
@@ -260,13 +263,13 @@ public class View extends javax.swing.JFrame {
             }
 
         } catch (NumberFormatException e) {
-            Lb_error.setText("Error: Salario y Codigo no pueden estar vacíos y deben ser números válidos.");
+            Lb_error.setText("Error: Salario y Código no pueden estar vacíos y deben ser números válidos.");
             return;
         }
 
-        String result = EM.crearEmpleado(code, name, salary, department);
+        String result = EM.newEmployee(code, name, salary, department);
 
-        if (!result.isEmpty()) {
+        if (result != null && !result.isEmpty()) {
             // Limpiar los campos de entrada solo si la operación fue exitosa
             clearFields();
             Lb_error.setText("Empleado agregado correctamente");
@@ -275,7 +278,43 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_Bt_hireActionPerformed
 
     private void Bt_dismissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_dismissActionPerformed
-        // TODO add your handling code here:
+        // Obtengo el valor del código del empleado a despedir.
+        String code = Tf_code.getText();
+
+        if (code.trim().isEmpty()) {
+            Lb_error.setText("El código no puede ser cero ni estar vacío.");
+            return;
+        }
+
+        int newCode; 
+        
+        try {
+            //Obtengo el valor introducido.
+            newCode = Integer.parseInt(code);
+
+            //Validación de que el codigo sea válido.
+            if (newCode <= 0) {
+                Lb_error.setText("el código debe ser mayor que cero.");
+                return;
+            }
+
+        } catch (NumberFormatException e) {
+            Lb_error.setText("Error: El código debe ser un número entero válido.");
+            return;
+            
+        }
+        
+        String result = null;
+        try {
+            result = EM.dissmisEmployee(newCode);
+        } catch (SQLException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (result != null && !result.isEmpty()) {
+            clearFields();
+             Lb_error.setText("Empleado despedido correctamente");
+        }
     }//GEN-LAST:event_Bt_dismissActionPerformed
 
     private void Bt_consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_consultActionPerformed

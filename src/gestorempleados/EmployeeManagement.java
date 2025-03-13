@@ -23,6 +23,7 @@ public class EmployeeManagement {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgre";
 
+    //Método para obtener la conexión.
     public static Connection obtenerConexion() {
 
         try {
@@ -46,7 +47,7 @@ public class EmployeeManagement {
     }
 
     //Método para crear y contratar empleados.
-    public String crearEmpleado(int code, String name, double salary, String department) {
+    public String newEmployee(int code, String name, double salary, String department) {
         Employee employee = new Employee();
 
         Connection conexion = EmployeeManagement.obtenerConexion();
@@ -96,6 +97,50 @@ public class EmployeeManagement {
             }
 
         }
+    }
+    
+    //Método para despedir a un empleado, eliminandolo de la BD.
+    public String dissmisEmployee(int code) throws SQLException {
+
+        //Creo la conexión.
+        Connection conexion = EmployeeManagement.obtenerConexion();
+
+        //Compruebo que la conexión es correcta para continuar.
+        if (conexion == null) {
+            return "No se ha podido realizar la conexion";
+        } else {
+
+            try {
+                //Hago la sentencia de borrado.
+                PreparedStatement statement = conexion.prepareStatement(
+                        "DELETE FROM Employees WHERE code = ?;");
+
+                statement.setInt(1, code);
+
+                //Ejecuto la consulta.
+                int updateRow = statement.executeUpdate();
+
+                //Compruebo que se ha completado la sentencia.
+                if (updateRow > 0) {
+                    return "Fila borrada correctamente: " + updateRow;
+                } else {
+                    return "No se ha encontrado ninguna fila con ese código: " + code;
+                }
+
+            } catch (SQLException ex) {
+                System.out.println("Error... " + ex.getMessage());
+                return "Error al borrar el empleado: " + ex.getMessage();
+
+                //Hago un finally para asegurarme de cerrar siempre la conexión.
+            } finally {
+                if (conexion != null) {
+                    conexion.close();
+                }
+
+            }
+
+        }
+
     }
 
     //Método para listar los empleados existentes.
