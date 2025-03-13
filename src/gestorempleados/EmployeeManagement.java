@@ -18,34 +18,32 @@ import org.postgresql.PGProperty;
  * @author amjpa
  */
 public class EmployeeManagement {
-    
+
     private static final String URL = "jdbc:postgresql://localhost:5432/Employees";
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgre";
-    
-    public static Connection obtenerConexion (){
-        
+
+    public static Connection obtenerConexion() {
+
         try {
             //Establezco la conexión
             Connection conexion = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("Conexion establecida");
             return conexion;
-            
+
         } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
             return null;
         }
-        
+
     }
     //Creación de un ArrayList, para guardar los empleados.
     ArrayList<Employee> employeeList = new ArrayList<>();
-    
+
     //Método para cerrar la aplicación.
-    public void salir(){
+    public void salir() {
         System.exit(0);
     }
-    
-    
 
     //Método para crear y contratar empleados.
     public String crearEmpleado(int code, String name, double salary, String department) {
@@ -100,7 +98,6 @@ public class EmployeeManagement {
         }
     }
 
-
     //Método para listar los empleados existentes.
     public String list() {
         StringBuilder text = new StringBuilder();
@@ -111,9 +108,9 @@ public class EmployeeManagement {
             text.append("Departamento: ").append(employeeList.get(i).getDepartment()).append(System.lineSeparator());
             text.append("---------------------------------------------------").append(System.lineSeparator());
         }
-        
+
         //Al utilizar un StringBuilder, debo convertirlo a String para poder hacer el return.
-        return text.toString();  
+        return text.toString();
     }
 
     //Método para insertar a empleados.
