@@ -15,24 +15,25 @@ public class View extends javax.swing.JFrame {
 
     EmployeeManagement EM;
     
-
-    
-    
     public View() {
         
         EM = new EmployeeManagement();
-        
         initComponents();
-        
     }
 
     public JTextField getTf_salary() {
         return Tf_salary;
     }
-
-    
     
     Employee employee = new Employee();
+
+    public void clearFields() {
+        Tf_name.setText("");
+        Tf_department.setText("");
+        Tf_salary.setText("");
+        Tf_code.setText("");
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -241,20 +242,20 @@ public class View extends javax.swing.JFrame {
             Lb_error.setText("Error: No puedes dejar campos vacíos.");
             return;
         }
-        
+
         try {
             //Convierto los datos obtenidos en los tipos correctos.
             salary = Double.parseDouble(Tf_salary.getText());
             code = Integer.parseInt(Tf_code.getText());
-            
+
             //Una vez que obtengo los campos, compruebo que no sean cero y ni estén vacíos.
-            if ( code <= 0 ) {
-             Lb_error.setText("Error: Código no puede ser 0 o estár vacío.");
-            return;
+            if (code <= 0) {
+                Lb_error.setText("Error: Código no puede ser 0 o estár vacío.");
+                return;
             }
-        
+
             if (salary <= 0) {
-                 Lb_error.setText("Error: Salario no puede ser 0 o estár vacío.");
+                Lb_error.setText("Error: Salario no puede ser 0 o estár vacío.");
                 return;
             }
 
@@ -265,16 +266,11 @@ public class View extends javax.swing.JFrame {
 
         String result = EM.crearEmpleado(code, name, salary, department);
 
-        Lb_error.setText(result);
-
-        // Limpiar los campos de entrada solo si la operación fue exitosa
-        if (result.equals("Empleado agregado correctamente")) {
-            Tf_name.setText("");
-            Tf_department.setText("");
-            Tf_salary.setText("");
-            Tf_code.setText("");
+        if (!result.isEmpty()) {
+            // Limpiar los campos de entrada solo si la operación fue exitosa
+            clearFields();
+            Lb_error.setText("Empleado agregado correctamente");
         }
-
 
     }//GEN-LAST:event_Bt_hireActionPerformed
 
@@ -329,6 +325,8 @@ public class View extends javax.swing.JFrame {
                 new View().setVisible(true);
             }
         });
+        
+     
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
