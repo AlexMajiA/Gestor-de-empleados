@@ -230,18 +230,36 @@ public class View extends javax.swing.JFrame {
 
     private void Bt_hireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_hireActionPerformed
 
-        //Obtengo los valores de los JTextFields
+        //Obtengo los valores de los JTextFields de tipo String
         int code = 0;
         String name = Tf_name.getText();
         String department = Tf_department.getText();
         double salary = 0.0;
 
+        //Valido que los campos no estén vacíos, en caso contrario muestro el error.
+        if (name.isEmpty() || department.isEmpty()) {
+            Lb_error.setText("Error: No puedes dejar campos vacíos.");
+            return;
+        }
+        
         try {
+            //Convierto los datos obtenidos en los tipos correctos.
             salary = Double.parseDouble(Tf_salary.getText());
             code = Integer.parseInt(Tf_code.getText());
+            
+            //Una vez que obtengo los campos, compruebo que no sean cero y ni estén vacíos.
+            if ( code <= 0 ) {
+             Lb_error.setText("Error: Código no puede ser 0 o estár vacío.");
+            return;
+            }
+        
+            if (salary <= 0) {
+                 Lb_error.setText("Error: Salario no puede ser 0 o estár vacío.");
+                return;
+            }
 
         } catch (NumberFormatException e) {
-            Lb_error.setText("Error: El salario debe ser un número.");
+            Lb_error.setText("Error: Salario y Codigo no pueden estar vacíos y deben ser números válidos.");
             return;
         }
 

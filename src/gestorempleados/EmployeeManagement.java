@@ -47,7 +47,7 @@ public class EmployeeManagement {
     
     
 
-    //Método para crear empleados.
+    //Método para crear y contratar empleados.
     public String crearEmpleado(int code, String name, double salary, String department) {
         Employee employee = new Employee();
 
@@ -74,10 +74,10 @@ public class EmployeeManagement {
                     employee.setName(name);
                     employee.setSalary(salary);
                     employee.setDepartment(department);
-                    
+
                     employeeList.add(employee);
 
-                    return "Filas actualizadas correctamente.";
+                    return "Empleado contratado y guardado en base de datos.";
                 } else {
                     return "El empleado no se ha insertado correctamente.";
                 }
@@ -98,13 +98,9 @@ public class EmployeeManagement {
             }
 
         }
-
-       
     }
 
-    
-    
-    
+
     //Método para listar los empleados existentes.
     public String list() {
         StringBuilder text = new StringBuilder();
