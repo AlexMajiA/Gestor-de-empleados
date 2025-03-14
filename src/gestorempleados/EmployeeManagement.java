@@ -190,9 +190,40 @@ public class EmployeeManagement {
         return text.toString();
     }
 
+        //Creo la conexión.
+        Connection conexion = EmployeeManagement.obtenerConexion();
+        
+        
+        
     //Método para ordenar a empleados.
-    public void order() {
+    public void orderCode() {
 
+        //Valido la conexión antes de seguir.
+        if (conexion == null) {
+            return;
+        }
+        
+        PreparedStatement stament = null;
+        
+            try {
+                stament = conexion.prepareStatement( 
+                        "SELECT * FROM Employees ORDER BY code;");
+               
+               stament.setString(1, code);
+                
+                //Ejecuto la consulta.
+                stament.executeQuery();
+                
+            } catch (SQLException ex) {
+                System.out.println("Error: No se puede realizar la consulta." + ex.getMessage());
+            }
+            
+            
+            
+            
+        
+        
+        
     }
 
 }
