@@ -7,11 +7,13 @@ package gestorempleados;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.postgresql.PGProperty;
+
 
 /**
  *
@@ -144,18 +146,53 @@ public class EmployeeManagement {
     }
 
     //Método para listar los empleados existentes.
-    public String list() {
-        StringBuilder text = new StringBuilder();
-        for (int i = 0; i < employeeList.size(); i++) {
-            text.append("Codigo ").append(employeeList.get(i).getCode()).append(System.lineSeparator());
-            text.append("Nombre: ").append(employeeList.get(i).getName()).append(System.lineSeparator());
-            text.append("Salario: ").append(employeeList.get(i).getSalary()).append(System.lineSeparator());
-            text.append("Departamento: ").append(employeeList.get(i).getDepartment()).append(System.lineSeparator());
-            text.append("---------------------------------------------------").append(System.lineSeparator());
+    public String list() throws SQLException {
+        
+        //Establezco la conexión.
+        Connection conexion = EmployeeManagement.obtenerConexion();
+        
+        //Verifico que la conexión sea correcta.
+        if (conexion == null) {
+            return "Conexión erronea";
         }
+        
+        String resultList;
+        
+        try {
+            //Hago la consulta a la BD.
+            PreparedStatement statement = conexion.prepareStatement(
+                    "SELECT * FROM Employees;");
+            
+            //Ejecuto la consulta con executeQuery, ya que es la necesaria para consultas con SELECT.
+            ResultSet res = statement.executeQuery();
+            
+            StringBuilder text = new StringBuilder();
+            
+            while (res.next()) {
+                
+                
+                    text.append("Codigo ").append(res.getInt("code")).append(System.lineSeparator());
+                    text.append("Nombre: ").append(res.getString("name")).append(System.lineSeparator());
+                    text.append("Salario: ").append(res.getInt("salary")).append(System.lineSeparator());
+                    text.append("Departamento: ").append(res.getString("department")).append(System.lineSeparator());
+                    text.append("---------------------------------------------------").append(System.lineSeparator());
+                
 
+            }
+
+            
+            
+            
         //Al utilizar un StringBuilder, debo convertirlo a String para poder hacer el return.
         return text.toString();
+            
+        } catch (SQLException ex) {
+             System.out.println("Error... " + ex.getMessage());
+             return "Error al listar los empleados: " + ex.getMessage();
+        }finally{
+            conexion.close();
+        }
+
     }
 
     //Método para insertar a empleados.
