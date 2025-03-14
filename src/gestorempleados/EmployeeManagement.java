@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.postgresql.PGProperty;
+
 
 
 /**
@@ -135,11 +135,8 @@ public class EmployeeManagement {
 
                 //Hago un finally para asegurarme de cerrar siempre la conexión.
             } finally {
-                if (conexion != null) {
-                    conexion.close();
-                    
-                }
-
+                if (conexion != null) conexion.close();
+                
             }
 
         }
@@ -158,7 +155,6 @@ public class EmployeeManagement {
         }
         
         StringBuilder text = new StringBuilder();
-        String resultList;
         PreparedStatement statement = null;
         ResultSet res = null;
         
@@ -176,7 +172,7 @@ public class EmployeeManagement {
                     //Recorro la base de datos y obtengo sus valores.
                     text.append("Codigo ").append(res.getInt("code")).append(System.lineSeparator());
                     text.append("Nombre: ").append(res.getString("name")).append(System.lineSeparator());
-                    text.append("Salario: ").append(res.getInt("salary")).append(System.lineSeparator());
+                    text.append("Salario: ").append(res.getDouble("salary")).append(System.lineSeparator());
                     text.append("Departamento: ").append(res.getString("department")).append(System.lineSeparator());
                     text.append("---------------------------------------------------").append(System.lineSeparator());
             }
@@ -188,14 +184,14 @@ public class EmployeeManagement {
             //Cierro las conexiones.
             if (res != null) res.close();
             if (statement != null) statement.close();
-            if (conexion != null) conexion.close();
+            conexion.close();
         }
         //Al utilizar un StringBuilder, debo convertirlo a String para poder hacer el return.
         return text.toString();
     }
 
-    //Método para insertar a empleados.
-    public void insertar() {
+    //Método para ordenar a empleados.
+    public void order() {
 
     }
 

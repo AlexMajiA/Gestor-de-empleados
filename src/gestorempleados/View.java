@@ -319,8 +319,13 @@ public class View extends javax.swing.JFrame {
 
     private void Bt_consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_consultActionPerformed
         
-        //Lamada al método de listar para obtener una lista de los empleados por textArea.
-        Ta_txtArea.setText(EM.list());
+        try {
+            //Lamada al método de listar para obtener una lista de los empleados por textArea.
+            Ta_txtArea.setText(EM.list());
+        } catch (SQLException ex) {
+            System.err.println("Error: " + ex.getMessage());
+            Lb_error.setText("No se ha podido realizar la consulta.");
+        }
         
         
     }//GEN-LAST:event_Bt_consultActionPerformed
