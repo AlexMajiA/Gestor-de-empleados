@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 
 
 
@@ -20,6 +21,8 @@ import java.util.logging.Logger;
  * @author amjpa
  */
 public class EmployeeManagement {
+    
+    private JComboBox<String> comboBox;
 
     private static final String URL = "jdbc:postgresql://localhost:5432/Employees";
     private static final String USER = "postgres";
@@ -189,41 +192,75 @@ public class EmployeeManagement {
         //Al utilizar un StringBuilder, debo convertirlo a String para poder hacer el return.
         return text.toString();
     }
+    
+    
+    //Método para ordenar a empleados.
+    public String orderCode() throws SQLException {
 
         //Creo la conexión.
         Connection conexion = EmployeeManagement.obtenerConexion();
-        
-        
-        
-    //Método para ordenar a empleados.
-    public void orderCode() {
 
         //Valido la conexión antes de seguir.
         if (conexion == null) {
-            return;
+            return "La conexión es invalida.";
+        }
+
+        PreparedStatement stament = null;
+        String order = comboBox.getSelectedItem().toString();
+        //comboBox = new JComboBox<>(new String[]{"Codigo", "Nombre", "Salario", "Departamento"});
+        StringBuilder allResult = new StringBuilder();
+        ResultSet resultSet = null;
+
+         // Mapeo de valores del ComboBox a las columnas en la base de datos
+        String columnToOrderBy = "";
+        switch (order) {
+            case "Código":
+                columnToOrderBy = "code";
+                break;
+            case "Nombre":
+                columnToOrderBy = "name";
+                break;
+            case "Salario":
+                columnToOrderBy = "salary";
+                break;
+            case "Departamento":
+                columnToOrderBy = "department";
+                break;
+            default:
+                columnToOrderBy = "code"; // Valor por defecto en caso de error
+                break;
         }
         
-        PreparedStatement stament = null;
-        
-            try {
-                stament = conexion.prepareStatement( 
-                        "SELECT * FROM Employees ORDER BY code;");
-               
-               //stament.setString(1, );
-                
-                //Ejecuto la consulta.
-                stament.executeQuery();
-                
-            } catch (SQLException ex) {
-                System.out.println("Error: No se puede realizar la consulta." + ex.getMessage());
+        try {
+            //Construyo la consulta en una variable.
+            String query = "SELECT * FROM Employees ORDER BY " + order;
+            stament = conexion.prepareStatement(query);
+
+            //Ejecuto la consulta antes del bucle para obtener los resultados.
+            resultSet = stament.executeQuery();
+
+            while (resultSet.next()) {
+                allResult.append(resultSet.getInt("Codigo")).append(System.lineSeparator());
+                allResult.append(resultSet.getString("Nombre")).append(System.lineSeparator());
+                allResult.append(resultSet.getDouble("Salario")).append(System.lineSeparator());
+                allResult.append(resultSet.getString("Departamento")).append(System.lineSeparator());
             }
-            
-            
-            
-            
-        
-        
-        
+
+        } catch (SQLException ex) {
+            System.out.println("Error: No se puede realizar la consulta." + ex.getMessage());
+        } finally {
+            //Cierro la conexión.
+                try {
+                     if (resultSet != null)resultSet.close();
+                     if (stament != null) stament.close();
+                     if (conexion != null) conexion.close();
+                } catch (SQLException e) {
+                    System.out.println("Error: No se puede finalizar la consulta." + e.getMessage());
+                }
+           
+        }
+        return null;
+
     }
 
 }

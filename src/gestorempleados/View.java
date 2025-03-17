@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -22,6 +23,7 @@ public class View extends javax.swing.JFrame {
         
         EM = new EmployeeManagement();
         initComponents();
+
     }
 
     public JTextField getTf_salary() {
@@ -230,7 +232,14 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_Cbox_orderActionPerformed
 
     private void Bt_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_orderActionPerformed
-        // TODO add your handling code here:
+        try {
+            //
+            Ta_txtArea.setText(EM.orderCode(JComboBox));
+        } catch (SQLException ex) {
+            
+        }
+        
+
     }//GEN-LAST:event_Bt_orderActionPerformed
 
     private void Bt_hireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_hireActionPerformed
