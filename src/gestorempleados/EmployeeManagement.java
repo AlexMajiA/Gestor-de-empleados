@@ -211,7 +211,7 @@ public class EmployeeManagement {
          //Mapeo de valores del ComboBox a las columnas en la base de datos
         String columnToOrderBy;
         switch (order) {
-            case "Código":
+            case "Codigo":
                 columnToOrderBy = "code";
                 break;
             case "Nombre":
