@@ -10,8 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 
@@ -165,7 +163,7 @@ public class EmployeeManagement {
         try {
             //Hago la consulta a la BD.
             statement = conexion.prepareStatement(
-                    "SELECT * FROM Employees;");
+                    "SELECT code, name, salary, department FROM Employees;");
             
             //Ejecuto la consulta con executeQuery, ya que es la necesaria para consultas con SELECT.
             res = statement.executeQuery();
@@ -206,16 +204,11 @@ public class EmployeeManagement {
             return "La conexión es invalida.";
         }
 
-        PreparedStatement stament = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
         StringBuilder allResult = new StringBuilder();
-        
-        //order = comboBox.getSelectedItem().toString();
-        //comboBox = new JComboBox<>(new String[]{"Codigo", "Nombre", "Salario", "Departamento"});
-        
-        
 
-         // Mapeo de valores del ComboBox a las columnas en la base de datos
+         //Mapeo de valores del ComboBox a las columnas en la base de datos
         String columnToOrderBy;
         switch (order) {
             case "Código":
@@ -231,19 +224,24 @@ public class EmployeeManagement {
                 columnToOrderBy = "department";
                 break;
             default:
-                columnToOrderBy = "code"; // Valor por defecto en caso de error
-                break;
+                return "Error: Opción de ordenación inválida.";
+                
         }
         
+
         try {
             //Construyo la consulta en una variable.
-            String query = "SELECT * FROM Employees ORDER BY " + columnToOrderBy;
-            stament = conexion.prepareStatement(query);
+            String query = "SELECT code, name, salary, department FROM Employees ORDER BY " + columnToOrderBy;
+            statement = conexion.prepareStatement(query);
 
             //Ejecuto la consulta antes del bucle para obtener los resultados.
-            resultSet = stament.executeQuery();
+            resultSet = statement.executeQuery();
 
+            //Verifico si hay empleados.
+            boolean hasResult = false;
+            
             while (resultSet.next()) {
+                hasResult = true;
                 allResult.append("Código: ").append(resultSet.getInt("code")).append("\n");
                 allResult.append("Nombre: ").append(resultSet.getString("name")).append("\n");
                 allResult.append("Salario: ").append(resultSet.getDouble("salary")).append("\n");
@@ -251,16 +249,21 @@ public class EmployeeManagement {
                 allResult.append("---------------------------\n");
             }
 
+            //Si no hay resultados, mando un mensaje.
+            if (!hasResult) {
+                return "No hay empleados en la base de datos.";
+            }
+            
         } catch (SQLException ex) {
             System.out.println("Error: No se puede realizar la consulta." + ex.getMessage());
         } finally {
             //Cierro la conexión.
                 try {
                      if (resultSet != null)resultSet.close();
-                     if (stament != null) stament.close();
+                     if (statement != null) statement.close();
                      if (conexion != null) conexion.close();
                 } catch (SQLException e) {
-                    System.out.println("Error: No se puede finalizar la consulta." + e.getMessage());
+                    System.out.println("Error al cerrar los recursos. " + e.getMessage());
                 }
            
         }
