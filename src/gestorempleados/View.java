@@ -119,7 +119,7 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        Cbox_order.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Salario", "Departamento" }));
+        Cbox_order.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre", "Salario", "Departamento" }));
         Cbox_order.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Cbox_orderActionPerformed(evt);
@@ -222,6 +222,7 @@ public class View extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Cbox_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbox_orderActionPerformed

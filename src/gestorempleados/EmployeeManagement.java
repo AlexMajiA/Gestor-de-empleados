@@ -209,7 +209,7 @@ public class EmployeeManagement {
                 stament = conexion.prepareStatement( 
                         "SELECT * FROM Employees ORDER BY code;");
                
-               stament.setString(1, code);
+               //stament.setString(1, );
                 
                 //Ejecuto la consulta.
                 stament.executeQuery();
