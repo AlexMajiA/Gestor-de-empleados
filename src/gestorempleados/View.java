@@ -4,12 +4,10 @@
  */
 package gestorempleados;
 
-import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -232,13 +230,17 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_Cbox_orderActionPerformed
 
     private void Bt_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_orderActionPerformed
+
         try {
-            //
-            Ta_txtArea.setText(EM.orderCode(JComboBox));
+            // Obtengo la opción seleccionada del ComboBox
+            String order = Cbox_order.getSelectedItem().toString();
+
+            //Llamo al método pasándole el valor seleccionado
+            Ta_txtArea.setText(EM.orderCode(order));
         } catch (SQLException ex) {
-            
+            Ta_txtArea.setText("Error al ordenar empleados: " + ex.getMessage());
         }
-        
+
 
     }//GEN-LAST:event_Bt_orderActionPerformed
 

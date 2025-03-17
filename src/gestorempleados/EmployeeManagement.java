@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 public class EmployeeManagement {
     
     private JComboBox<String> comboBox;
+   // private javax.swing.JComboBox<String> jComboBox;
 
     private static final String URL = "jdbc:postgresql://localhost:5432/Employees";
     private static final String USER = "postgres";
@@ -195,7 +196,7 @@ public class EmployeeManagement {
     
     
     //Método para ordenar a empleados.
-    public String orderCode() throws SQLException {
+    public String orderCode(String order) throws SQLException {
 
         //Creo la conexión.
         Connection conexion = EmployeeManagement.obtenerConexion();
@@ -206,13 +207,16 @@ public class EmployeeManagement {
         }
 
         PreparedStatement stament = null;
-        String order = comboBox.getSelectedItem().toString();
-        //comboBox = new JComboBox<>(new String[]{"Codigo", "Nombre", "Salario", "Departamento"});
-        StringBuilder allResult = new StringBuilder();
         ResultSet resultSet = null;
+        StringBuilder allResult = new StringBuilder();
+        
+        //order = comboBox.getSelectedItem().toString();
+        //comboBox = new JComboBox<>(new String[]{"Codigo", "Nombre", "Salario", "Departamento"});
+        
+        
 
          // Mapeo de valores del ComboBox a las columnas en la base de datos
-        String columnToOrderBy = "";
+        String columnToOrderBy;
         switch (order) {
             case "Código":
                 columnToOrderBy = "code";
@@ -233,17 +237,18 @@ public class EmployeeManagement {
         
         try {
             //Construyo la consulta en una variable.
-            String query = "SELECT * FROM Employees ORDER BY " + order;
+            String query = "SELECT * FROM Employees ORDER BY " + columnToOrderBy;
             stament = conexion.prepareStatement(query);
 
             //Ejecuto la consulta antes del bucle para obtener los resultados.
             resultSet = stament.executeQuery();
 
             while (resultSet.next()) {
-                allResult.append(resultSet.getInt("Codigo")).append(System.lineSeparator());
-                allResult.append(resultSet.getString("Nombre")).append(System.lineSeparator());
-                allResult.append(resultSet.getDouble("Salario")).append(System.lineSeparator());
-                allResult.append(resultSet.getString("Departamento")).append(System.lineSeparator());
+                allResult.append("Código: ").append(resultSet.getInt("code")).append("\n");
+                allResult.append("Nombre: ").append(resultSet.getString("name")).append("\n");
+                allResult.append("Salario: ").append(resultSet.getDouble("salary")).append("\n");
+                allResult.append("Departamento: ").append(resultSet.getString("department")).append("\n");
+                allResult.append("---------------------------\n");
             }
 
         } catch (SQLException ex) {
@@ -259,7 +264,7 @@ public class EmployeeManagement {
                 }
            
         }
-        return null;
+        return allResult.toString();
 
     }
 
