@@ -72,6 +72,7 @@ public class View extends javax.swing.JFrame {
         Tf_code = new javax.swing.JTextField();
         Bt_clean = new javax.swing.JButton();
         Bt_cleanFields = new javax.swing.JButton();
+        Bt_search = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +151,8 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        Bt_search.setText("Buscar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +180,8 @@ public class View extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel3)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(Bt_search))
                                             .addGap(44, 44, 44)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(Tf_department)
@@ -185,12 +189,12 @@ public class View extends javax.swing.JFrame {
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                            .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(Cbox_order, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(Bt_order))
-                                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                            .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(Bt_hire)
                                                                 .addGap(64, 64, 64)
                                                                 .addComponent(Bt_dismiss))))
@@ -234,7 +238,8 @@ public class View extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Bt_hire)
-                            .addComponent(Bt_dismiss))
+                            .addComponent(Bt_dismiss)
+                            .addComponent(Bt_search))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -437,6 +442,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JButton Bt_exist;
     private javax.swing.JButton Bt_hire;
     private javax.swing.JButton Bt_order;
+    private javax.swing.JButton Bt_search;
     private javax.swing.JComboBox<String> Cbox_order;
     private javax.swing.JLabel Lb_error;
     private javax.swing.JTextArea Ta_txtArea;

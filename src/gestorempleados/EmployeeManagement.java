@@ -12,16 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 
-
-
 /**
  *
  * @author amjpa
  */
 public class EmployeeManagement {
-    
+
     private JComboBox<String> comboBox;
-   // private javax.swing.JComboBox<String> jComboBox;
 
     private static final String URL = "jdbc:postgresql://localhost:5432/Employees";
     private static final String USER = "postgres";
@@ -102,7 +99,7 @@ public class EmployeeManagement {
 
         }
     }
-    
+
     //Método para despedir a un empleado, eliminandolo de la BD.
     public String dissmisEmployee(int code) throws SQLException {
 
@@ -137,8 +134,10 @@ public class EmployeeManagement {
 
                 //Hago un finally para asegurarme de cerrar siempre la conexión.
             } finally {
-                if (conexion != null) conexion.close();
-                
+                if (conexion != null) {
+                    conexion.close();
+                }
+
             }
 
         }
@@ -147,52 +146,55 @@ public class EmployeeManagement {
 
     //Método para listar los empleados existentes.
     public String list() throws SQLException {
-        
+
         //Establezco la conexión.
         Connection conexion = EmployeeManagement.obtenerConexion();
-        
+
         //Verifico que la conexión sea correcta.
         if (conexion == null) {
             return "Conexión erronea";
         }
-        
+
         StringBuilder text = new StringBuilder();
         PreparedStatement statement = null;
         ResultSet res = null;
-        
+
         try {
             //Hago la consulta a la BD.
             statement = conexion.prepareStatement(
                     "SELECT code, name, salary, department FROM Employees;");
-            
+
             //Ejecuto la consulta con executeQuery, ya que es la necesaria para consultas con SELECT.
             res = statement.executeQuery();
-            
+
             text = new StringBuilder();
-            
+
             while (res.next()) {
-                    //Recorro la base de datos y obtengo sus valores.
-                    text.append("Codigo ").append(res.getInt("code")).append(System.lineSeparator());
-                    text.append("Nombre: ").append(res.getString("name")).append(System.lineSeparator());
-                    text.append("Salario: ").append(res.getDouble("salary")).append(System.lineSeparator());
-                    text.append("Departamento: ").append(res.getString("department")).append(System.lineSeparator());
-                    text.append("---------------------------------------------------").append(System.lineSeparator());
+                //Recorro la base de datos y obtengo sus valores.
+                text.append("Codigo ").append(res.getInt("code")).append(System.lineSeparator());
+                text.append("Nombre: ").append(res.getString("name")).append(System.lineSeparator());
+                text.append("Salario: ").append(res.getDouble("salary")).append(System.lineSeparator());
+                text.append("Departamento: ").append(res.getString("department")).append(System.lineSeparator());
+                text.append("---------------------------------------------------").append(System.lineSeparator());
             }
-            
+
         } catch (SQLException ex) {
-             System.out.println("Error... " + ex.getMessage());
-             return "Error al listar los empleados: " + ex.getMessage();
-        }finally{
+            System.out.println("Error... " + ex.getMessage());
+            return "Error al listar los empleados: " + ex.getMessage();
+        } finally {
             //Cierro las conexiones.
-            if (res != null) res.close();
-            if (statement != null) statement.close();
+            if (res != null) {
+                res.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
             conexion.close();
         }
         //Al utilizar un StringBuilder, debo convertirlo a String para poder hacer el return.
         return text.toString();
     }
-    
-    
+
     //Método para ordenar a empleados.
     public String orderCode(String order) throws SQLException {
 
@@ -208,7 +210,7 @@ public class EmployeeManagement {
         ResultSet resultSet = null;
         StringBuilder allResult = new StringBuilder();
 
-         //Mapeo de valores del ComboBox a las columnas en la base de datos
+        //Mapeo de valores del ComboBox a las columnas en la base de datos
         String columnToOrderBy;
         switch (order) {
             case "Codigo":
@@ -225,9 +227,8 @@ public class EmployeeManagement {
                 break;
             default:
                 return "Error: Opción de ordenación inválida.";
-                
+
         }
-        
 
         try {
             //Construyo la consulta en una variable.
@@ -239,7 +240,7 @@ public class EmployeeManagement {
 
             //Verifico si hay empleados.
             boolean hasResult = false;
-            
+
             while (resultSet.next()) {
                 hasResult = true;
                 allResult.append("Código: ").append(resultSet.getInt("code")).append("\n");
@@ -253,7 +254,7 @@ public class EmployeeManagement {
             if (!hasResult) {
                 return "No hay empleados en la base de datos.";
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("Error: No se puede realizar la consulta." + ex.getMessage());
         } finally {
@@ -271,4 +272,13 @@ public class EmployeeManagement {
 
     }
 
+    
+    //Método para buscar empleados.
+    public String searchEmployee(){
+        
+        //Creo la conexión.
+        Connection conexion = EmployeeManagement.obtenerConexion();
+        
+        
+    }
 }
