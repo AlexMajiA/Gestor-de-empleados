@@ -414,13 +414,6 @@ public class View extends javax.swing.JFrame {
            return; 
         }
         
-        
-        
-        
-        
-        
-        
-        
     }//GEN-LAST:event_Bt_searchActionPerformed
 
     /**
