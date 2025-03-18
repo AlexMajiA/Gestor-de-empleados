@@ -49,32 +49,43 @@ public class EmployeeManagement {
 
     //Método para crear y contratar empleados.
     public String newEmployee(int code, String name, double salary, String department) {
+       //Instancio un nuevo empleado.
         Employee employee = new Employee();
 
+        //Instancio fuera del Try para poder cerrar la conexión en el finally.
+        PreparedStatement statement = null;
+        
+        //Establezco la conexión.
         Connection conexion = EmployeeManagement.obtenerConexion();
 
+        //Verificación correcta de la conexión.
         if (conexion == null) {
             return "La conexión es nula, no se puede insertar empleado.";
 
         } else {
 
             try {
-                PreparedStatement statement = conexion.prepareStatement(
+                //Realización de la consulta.
+                statement = conexion.prepareStatement(
                         "INSERT INTO Employees (code, name, salary, department) VALUES (?, ?, ?, ?);");
 
+                //Establezco los parametros del placeholder.
                 statement.setInt(1, code);
                 statement.setString(2, name);
                 statement.setDouble(3, salary);
                 statement.setString(4, department);
 
+                //Ejecuto la consulta.
                 int updateRow = statement.executeUpdate();
 
+                //Verifico que contenga valores positivos.
                 if (updateRow > 0) {
                     employee.setCode(code);
                     employee.setName(name);
                     employee.setSalary(salary);
                     employee.setDepartment(department);
 
+                    //Añado los empleados al Array.
                     employeeList.add(employee);
 
                     return "Empleado contratado y guardado en base de datos.";
@@ -86,11 +97,11 @@ public class EmployeeManagement {
                 System.out.println("Error... " + ex.getMessage());
                 return "Error al insertar el empleado: " + ex.getMessage();
             } finally {
-
+                //Cierro las conexiones.
                 try {
-                    if (conexion != null) {
-                        conexion.close();
-                    }
+                    if (conexion != null) conexion.close();
+                    if (statement != null) statement.close();
+                    
                 } catch (SQLException e) {
                     System.out.println("Error al cerrar la conexión: " + e.getMessage());
                 }
