@@ -333,15 +333,10 @@ public class EmployeeManagement {
             
         } finally {
             try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (conexion != null) conexion.close();
+                
             } catch (SQLException ex) {
                 System.out.println("Error al cerrar los recursos. " + ex.getMessage());
             }

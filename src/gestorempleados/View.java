@@ -18,10 +18,8 @@ public class View extends javax.swing.JFrame {
     EmployeeManagement EM;
     
     public View() {
-        
         EM = new EmployeeManagement();
         initComponents();
-
     }
 
     public JTextField getTf_salary() {
@@ -30,13 +28,14 @@ public class View extends javax.swing.JFrame {
     
     Employee employee = new Employee();
 
+    //Método para limpiar campos.
     public void clearFields() {
         Tf_name.setText("");
         Tf_department.setText("");
         Tf_salary.setText("");
         Tf_code.setText("");
     }
-    
+    //Método para limpiar el TextArea.
     public void clearTextArea(){
         Ta_txtArea.setText("");
     }
@@ -279,7 +278,7 @@ public class View extends javax.swing.JFrame {
     private void Bt_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_orderActionPerformed
 
         try {
-            // Obtengo la opción seleccionada del ComboBox
+            //Obtengo la opción seleccionada del ComboBox
             String order = Cbox_order.getSelectedItem().toString();
 
             //Llamo al método pasándole el valor seleccionado
@@ -326,6 +325,7 @@ public class View extends javax.swing.JFrame {
             return;
         }
 
+        //Guardo en una variable, los valores que devuelve el método.
         String result = EM.newEmployee(code, name, salary, department);
 
         if (result != null && !result.isEmpty()) {
@@ -340,11 +340,13 @@ public class View extends javax.swing.JFrame {
         // Obtengo el valor del código del empleado a despedir.
         String code = Tf_code.getText();
 
+        //Compruebo que el código sea válido.
         if (code.trim().isEmpty()) {
             Lb_error.setText("El código no puede ser cero ni estar vacío.");
             return;
         }
 
+        //Declaro variable.
         int newCode; 
         
         try {
@@ -363,6 +365,7 @@ public class View extends javax.swing.JFrame {
             
         }
         
+        //Declaro variable y la instancio a null por estar fuera del Try.
         String result = null;
         try {
             result = EM.dissmisEmployee(newCode);
@@ -370,6 +373,7 @@ public class View extends javax.swing.JFrame {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        //Verifico si es nulo o está vacío.
         if (result != null && !result.isEmpty()) {
             clearFields();
              Lb_error.setText("Empleado despedido correctamente");
@@ -379,7 +383,7 @@ public class View extends javax.swing.JFrame {
     private void Bt_consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_consultActionPerformed
         
         try {
-            //Lamada al método de listar para obtener una lista de los empleados por textArea.
+            //Llamada al método de listar para obtener una lista de los empleados por textArea.
             Ta_txtArea.setText(EM.list());
         } catch (SQLException ex) {
             System.err.println("Error: " + ex.getMessage());
@@ -396,13 +400,14 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_Bt_existActionPerformed
 
     private void Bt_cleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_cleanActionPerformed
-        // Limpiador del textArea
         
+        // Limpiador del textArea
         clearTextArea();
         Lb_error.setText("");
     }//GEN-LAST:event_Bt_cleanActionPerformed
 
     private void Bt_cleanFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_cleanFieldsActionPerformed
+       
         // Limpiador de campos.
         clearFields();
         Lb_error.setText("");
