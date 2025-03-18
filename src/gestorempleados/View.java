@@ -152,6 +152,11 @@ public class View extends javax.swing.JFrame {
         });
 
         Bt_search.setText("Buscar");
+        Bt_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_searchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -396,6 +401,27 @@ public class View extends javax.swing.JFrame {
         clearFields();
         Lb_error.setText("");
     }//GEN-LAST:event_Bt_cleanFieldsActionPerformed
+
+    private void Bt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_searchActionPerformed
+        
+        //Obtengo el valor del código.
+        String code = Tf_code.getText();
+        
+        if (!code.isBlank()) {
+            EM.searchEmployee(code);
+            Ta_txtArea.setText(EM.searchEmployee(code));
+        }else {
+           return; 
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_Bt_searchActionPerformed
 
     /**
      * @param args the command line arguments

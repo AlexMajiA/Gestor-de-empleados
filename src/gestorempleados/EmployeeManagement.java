@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 /**
@@ -274,11 +276,72 @@ public class EmployeeManagement {
 
     
     //Método para buscar empleados.
-    public String searchEmployee(){
+    public String searchEmployee(String codeConsult){
+        
+        //Se inicializa para que no de excepción 
+        StringBuilder allResult = new StringBuilder();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
         
         //Creo la conexión.
         Connection conexion = EmployeeManagement.obtenerConexion();
         
+        if (conexion == null) {
+            return "No se ha podido realizar la conexión.";
+        }
         
+        //Compruebo que el código no este vacío ni tenga espacios.
+        if (codeConsult.isBlank()) {
+            return "Error, el código no puede estar vacío ni contener espacios";
+        }
+        
+        
+        try {
+            //Hago la consulta
+            String query = "SELECT code, name, salary, department FROM Employees WHERE code = ?";
+            statement = conexion.prepareStatement(query );
+            
+            statement.setInt(1, Integer.parseInt(codeConsult));
+            
+            //Valido que el número sea positivo.
+            if (Integer.parseInt(codeConsult) <= 0) {
+                return "Error: El código debe ser un número positivo.";
+            }
+            
+            //Ejecutando la consulta.
+            resultSet = statement.executeQuery();
+            
+            
+            while (resultSet.next()) {   
+                allResult.append("Código: ").append(resultSet.getInt("code")).append("\n");
+                allResult.append("Nombre: ").append(resultSet.getString("name")).append("\n");
+                allResult.append("Salario: ").append(resultSet.getDouble("salary")).append("\n");
+                allResult.append("Departamento: ").append(resultSet.getString("department")).append("\n");
+                allResult.append("---------------------------\n");
+            }
+            
+         } catch (NumberFormatException ex) {
+            return "Error: solo se permiten números positivos.";
+             
+        } catch (SQLException ex) {
+            return "Error: Código de empleado no encontrado.";
+            
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (conexion != null) {
+
+                    conexion.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar los recursos. " + ex.getMessage());
+            }
+        }
+        return allResult.toString();
     }
 }
