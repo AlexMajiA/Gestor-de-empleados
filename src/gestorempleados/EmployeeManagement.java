@@ -93,6 +93,7 @@ public class EmployeeManagement {
                     return "El empleado no se ha insertado correctamente.";
                 }
 
+                //Capturo las excepciones.
             } catch (SQLException ex) {
                 System.out.println("Error... " + ex.getMessage());
                 return "Error al insertar el empleado: " + ex.getMessage();
@@ -145,10 +146,7 @@ public class EmployeeManagement {
 
                 //Hago un finally para asegurarme de cerrar siempre la conexión.
             } finally {
-                if (conexion != null) {
-                    conexion.close();
-                }
-
+                if (conexion != null) conexion.close();
             }
 
         }
@@ -166,6 +164,7 @@ public class EmployeeManagement {
             return "Conexión erronea";
         }
 
+        //Los declaro fuera del Try para poder cerrar en el finally.
         StringBuilder text = new StringBuilder();
         PreparedStatement statement = null;
         ResultSet res = null;
@@ -194,12 +193,8 @@ public class EmployeeManagement {
             return "Error al listar los empleados: " + ex.getMessage();
         } finally {
             //Cierro las conexiones.
-            if (res != null) {
-                res.close();
-            }
-            if (statement != null) {
-                statement.close();
-            }
+            if (res != null) res.close();
+            if (statement != null)statement.close();
             conexion.close();
         }
         //Al utilizar un StringBuilder, debo convertirlo a String para poder hacer el return.
@@ -216,7 +211,8 @@ public class EmployeeManagement {
         if (conexion == null) {
             return "La conexión es invalida.";
         }
-
+        
+        //Los declaro fuera del Try para poder cerrar en el finally.
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         StringBuilder allResult = new StringBuilder();
@@ -295,6 +291,7 @@ public class EmployeeManagement {
         //Creo la conexión.
         Connection conexion = EmployeeManagement.obtenerConexion();
         
+        //Compruebo la conexión.
         if (conexion == null) {
             return "No se ha podido realizar la conexión.";
         }
@@ -303,7 +300,6 @@ public class EmployeeManagement {
         if (codeConsult.isBlank()) {
             return "Error, el código no puede estar vacío ni contener espacios";
         }
-        
         
         try {
             //Hago la consulta
@@ -320,7 +316,7 @@ public class EmployeeManagement {
             //Ejecutando la consulta.
             resultSet = statement.executeQuery();
             
-            
+            //Recorro la base de datos para obtener los valores.
             while (resultSet.next()) {   
                 allResult.append("Código: ").append(resultSet.getInt("code")).append("\n");
                 allResult.append("Nombre: ").append(resultSet.getString("name")).append("\n");
