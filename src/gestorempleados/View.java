@@ -164,6 +164,11 @@ public class View extends javax.swing.JFrame {
         });
 
         Bt_modify.setText("Modificar");
+        Bt_modify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_modifyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -435,6 +440,19 @@ public class View extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_Bt_searchActionPerformed
+
+    private void Bt_modifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_modifyActionPerformed
+        // 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_Bt_modifyActionPerformed
 
     /**
      * @param args the command line arguments

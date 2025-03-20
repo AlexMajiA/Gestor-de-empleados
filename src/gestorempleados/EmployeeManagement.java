@@ -347,7 +347,7 @@ public class EmployeeManagement {
     }
     
     //Metodo para modificar empleados.
-    public String modigyEmployees (){
+    public String modifyEmployees (String name, double salary, String department, int code){
         
        //Creo la conexión.
        Connection conexion = EmployeeManagement.obtenerConexion();
@@ -359,31 +359,43 @@ public class EmployeeManagement {
         
         
         PreparedStatement statement = null;
-        String query = "";
+        String query = "UPDATE Employees SET name = ?, salary = ?, department = ? WHERE code = ?";
         
         
         try {
             
+        //Hago la consulta.    
+        statement = conexion.prepareStatement(query);
+        
+        statement.setString(1, name);
+        statement.setDouble(2, salary);
+        statement.setString(3, department);
+        statement.setInt(4, code);
+        
+        //executeUpdate devuelve un número de filas afectadas, por lo que lo guardo en variable 
+        //y lo uso para ver cuantas filas se han visto afectadas.
+        int updateRows = statement.executeUpdate();
             
+            if (updateRows == 0) {
+                return "No se ha actualizado ninguna fila";
+            }else {
+                return "Filas actualizadas: " + updateRows + ". Proceso correcto.";
+            }
             
-            
-            
-        } catch (Exception e) {
+             
+        } catch (SQLException e) {
+         return "Error durante la consulta: " + e.getMessage();
+         
         } finally {
             try {
-            if (conexion != null) conexion.close();
             if (statement != null) statement.close();
-            //if (conexion != null) conexion.close();
+            if (conexion != null) conexion.close();
            
             } catch (SQLException ex) {
                 System.out.println("Error al cerrar los recursos. " + ex.getMessage());
             }
             
         }
-        
-        
-        
-    return "";
     }
     
 }
