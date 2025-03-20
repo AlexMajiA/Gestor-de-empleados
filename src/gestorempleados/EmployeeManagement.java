@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 /**
@@ -343,4 +345,45 @@ public class EmployeeManagement {
         }
         return allResult.toString();
     }
+    
+    //Metodo para modificar empleados.
+    public String modigyEmployees (){
+        
+       //Creo la conexión.
+       Connection conexion = EmployeeManagement.obtenerConexion();
+       
+        //Verifico que la conexión es correcta.
+        if (conexion == null) {
+            return "Error en la conexión.";
+        }
+        
+        
+        PreparedStatement statement = null;
+        String query = "";
+        
+        
+        try {
+            
+            
+            
+            
+            
+        } catch (Exception e) {
+        } finally {
+            try {
+            if (conexion != null) conexion.close();
+            if (statement != null) statement.close();
+            //if (conexion != null) conexion.close();
+           
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar los recursos. " + ex.getMessage());
+            }
+            
+        }
+        
+        
+        
+    return "";
+    }
+    
 }
