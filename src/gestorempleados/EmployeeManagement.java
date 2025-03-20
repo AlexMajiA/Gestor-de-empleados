@@ -347,7 +347,7 @@ public class EmployeeManagement {
     }
     
     //Metodo para modificar empleados.
-    public String modifyEmployees (String name, double salary, String department, int code){
+    public String modifyEmployees (int code, String name, double salary, String department){
         
        //Creo la conexión.
        Connection conexion = EmployeeManagement.obtenerConexion();

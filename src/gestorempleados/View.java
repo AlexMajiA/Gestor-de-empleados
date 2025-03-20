@@ -297,6 +297,9 @@ public class View extends javax.swing.JFrame {
 
             //Llamo al método pasándole el valor seleccionado
             Ta_txtArea.setText(EM.orderCode(order));
+            
+            //Limpio el campo de errores.
+            Lb_error.setText("");
         } catch (SQLException ex) {
             Ta_txtArea.setText("Error al ordenar empleados: " + ex.getMessage());
         }
@@ -435,14 +438,29 @@ public class View extends javax.swing.JFrame {
         if (!code.isBlank()) {
             EM.searchEmployee(code);
             Ta_txtArea.setText(EM.searchEmployee(code));
+            Lb_error.setText("");
         }else {
+            Lb_error.setText("Debes introducir un número en código.");
            return; 
         }
         
     }//GEN-LAST:event_Bt_searchActionPerformed
 
     private void Bt_modifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_modifyActionPerformed
-        // 
+        
+    //Obtengo el valor del código.
+    String code = Tf_code.getText();
+    
+        if (!code.isBlank()) {
+            
+            String name = Tf_name.getText();
+            Double salary = Double.parseDouble(Tf_salary.getText());
+            String department = Tf_department.getText();
+            
+            
+            String result = EM.modifyEmployees(Integer.parseInt(code), name, salary, department);
+            Ta_txtArea.setText(result);
+        }
         
         
         
