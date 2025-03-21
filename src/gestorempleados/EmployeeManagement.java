@@ -10,8 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 /**
@@ -318,15 +316,24 @@ public class EmployeeManagement {
             //Ejecutando la consulta.
             resultSet = statement.executeQuery();
             
-            //Recorro la base de datos para obtener los valores.
-            while (resultSet.next()) {   
+            //Verifico que si no devuelve nada, el empleado no existe.
+            if (!resultSet.next()) {
+                return "Empleado no encontrado.";
+            }
+            
+            //Al llamar a resultSet.next(), puedo empezar a consultar directamente con uin Do while.
+            
+            do{
                 allResult.append("Código: ").append(resultSet.getInt("code")).append("\n");
                 allResult.append("Nombre: ").append(resultSet.getString("name")).append("\n");
                 allResult.append("Salario: ").append(resultSet.getDouble("salary")).append("\n");
                 allResult.append("Departamento: ").append(resultSet.getString("department")).append("\n");
                 allResult.append("---------------------------\n");
-            }
             
+             //Recorro la base de datos para obtener los valores.
+            }  while (resultSet.next());
+
+         
          } catch (NumberFormatException ex) {
             return "Error: solo se permiten números positivos.";
              
