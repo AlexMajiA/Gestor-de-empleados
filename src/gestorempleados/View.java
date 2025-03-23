@@ -460,6 +460,8 @@ public class View extends javax.swing.JFrame {
             
             String result = EM.modifyEmployees(Integer.parseInt(code), name, salary, department);
             Ta_txtArea.setText(result);
+        } else {
+            Lb_error.setText("Debes introducir Código.");
         }
         
         
