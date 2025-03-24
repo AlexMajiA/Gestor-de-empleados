@@ -87,7 +87,6 @@ public class EmployeeManagement {
 
                     //Añado los empleados al Array.
                     employeeList.add(employee);
-
                     return "Empleado contratado y guardado en base de datos.";
                 } else {
                     return "El empleado no se ha insertado correctamente.";

@@ -12,11 +12,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
 /**
  *
  * @author amjpa
  */
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)  //Esta línea establece el orden de ejecución de los tests
 public class EmployeeManagementIT {
     
     public EmployeeManagementIT() {
@@ -31,7 +35,11 @@ public class EmployeeManagementIT {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
+         // Limpiar empleados para asegurarse que la base de datos está limpia
+       // EmployeeManagement instance = new EmployeeManagement();
+       // instance.dissmisEmployee(101);  // Intentamos borrar cualquier empleado con el código 101 (si existe)
+       //instance.newEmployee(101, "Test", 1, "TEst");
     }
     
     @After
@@ -61,7 +69,7 @@ public class EmployeeManagementIT {
      * Test of newEmployee method, of class EmployeeManagement.
      */
     @Test
-    public void testNewEmployee() {
+    public void testNewEmployee() throws InterruptedException {
         System.out.println("newEmployee");
         
         //Datos del nuevo empleado
@@ -73,16 +81,18 @@ public class EmployeeManagementIT {
         //Creo instancia de EmployeeManagement
         EmployeeManagement instance = new EmployeeManagement();
         
-        // Ejecutar el método para agregar empleado
+        //Ejecuto el método para agregar empleado
         String expResult = "Empleado contratado y guardado en base de datos.";
         String result = instance.newEmployee(code, name, salary, department);
         
-        // Verificar que el método devolvió el mensaje esperado
+        //Verifico que el método devolvió el mensaje esperado
         assertEquals(expResult, result);
         
-         //Valido que el empleado realmente se guardó en la base de datos
-         String searchResult = instance.searchEmployee(String.valueOf(code));
+        Thread.sleep(100);
+        //Valido que el empleado realmente se guardó en la base de datos
+        String searchResult = instance.searchEmployee(String.valueOf(code));
          
+        Thread.sleep(100);
         //El resultado de la búsqueda no debe ser "Empleado no encontrado."
         assertNotEquals("Empleado no encontrado.", searchResult);
         
@@ -99,10 +109,23 @@ public class EmployeeManagementIT {
     @Test
     public void testDissmisEmployee() throws Exception {
         System.out.println("dissmisEmployee");
-        int code = 0;
+        
+        //String updateRow = null;
+        //Introduzco código de empleado a borrar
+        int code = 101;
+        
+        //Creo instancia de EmployeeManagement
         EmployeeManagement instance = new EmployeeManagement();
-        String expResult = "";
+        
+        //Verificación antes de eliminar.
+        System.out.println("Antes de eliminar: " + instance.searchEmployee(String.valueOf(code)));
+        
+
+        
+        String expResult = "Fila borrada correctamente: " + 1;
         String result = instance.dissmisEmployee(code);
+        
+        //Verifico que el método devolvió el mensaje esperado
         assertEquals(expResult, result);
        
     }

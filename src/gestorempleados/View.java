@@ -362,10 +362,9 @@ public class View extends javax.swing.JFrame {
             Lb_error.setText("El código no puede ser cero ni estar vacío.");
             return;
         }
-
         //Declaro variable.
-        int newCode; 
-        
+        int newCode;
+
         try {
             //Obtengo el valor introducido.
             newCode = Integer.parseInt(code);
@@ -379,9 +378,8 @@ public class View extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             Lb_error.setText("Error: El código debe ser un número entero válido.");
             return;
-            
         }
-        
+
         //Declaro variable y la instancio a null por estar fuera del Try.
         String result = null;
         try {
@@ -389,11 +387,12 @@ public class View extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Verifico si es nulo o está vacío.
         if (result != null && !result.isEmpty()) {
             clearFields();
-             Lb_error.setText("Empleado despedido correctamente");
+            clearTextArea();
+            Lb_error.setText("Empleado despedido correctamente");
         }
     }//GEN-LAST:event_Bt_dismissActionPerformed
 
