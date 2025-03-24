@@ -65,6 +65,7 @@ public class EmployeeManagement {
         } else {
 
             try {
+                System.out.println("Insertando empleado con código: " + code);
                 //Realización de la consulta.
                 statement = conexion.prepareStatement(
                         "INSERT INTO Employees (code, name, salary, department) VALUES (?, ?, ?, ?);");
@@ -180,7 +181,7 @@ public class EmployeeManagement {
 
             while (res.next()) {
                 //Recorro la base de datos y obtengo sus valores.
-                text.append("Codigo ").append(res.getInt("code")).append(System.lineSeparator());
+                text.append("Código ").append(res.getInt("code")).append(System.lineSeparator());
                 text.append("Nombre: ").append(res.getString("name")).append(System.lineSeparator());
                 text.append("Salario: ").append(res.getDouble("salary")).append(System.lineSeparator());
                 text.append("Departamento: ").append(res.getString("department")).append(System.lineSeparator());

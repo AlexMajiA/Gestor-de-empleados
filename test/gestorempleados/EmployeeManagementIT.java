@@ -6,6 +6,7 @@ package gestorempleados;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,7 +21,9 @@ import org.junit.runners.MethodSorters;
  * @author amjpa
  */
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)  //Esta línea establece el orden de ejecución de los tests
+//Esta línea establece el orden de ejecución de los tests
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)  
+
 public class EmployeeManagementIT {
     
     public EmployeeManagementIT() {
@@ -43,7 +46,10 @@ public class EmployeeManagementIT {
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
+        EmployeeManagement instance = new EmployeeManagement();
+        instance.dissmisEmployee(102);
+        //instance.dissmisEmployee(101);
     }
 
     /**
@@ -88,11 +94,11 @@ public class EmployeeManagementIT {
         //Verifico que el método devolvió el mensaje esperado
         assertEquals(expResult, result);
         
-        Thread.sleep(100);
+        //Thread.sleep(100);
         //Valido que el empleado realmente se guardó en la base de datos
         String searchResult = instance.searchEmployee(String.valueOf(code));
          
-        Thread.sleep(100);
+        //Thread.sleep(100);
         //El resultado de la búsqueda no debe ser "Empleado no encontrado."
         assertNotEquals("Empleado no encontrado.", searchResult);
         
@@ -135,14 +141,33 @@ public class EmployeeManagementIT {
      */
     @Test
     public void testList() throws Exception {
-        System.out.println("list");
-        EmployeeManagement instance = new EmployeeManagement();
-        String expResult = "";
-        String result = instance.list();
-        assertEquals(expResult, result);
-      
-    }
+       System.out.println("list");
+    
+    // Instancio la clase EmployeeManagement
+    EmployeeManagement instance = new EmployeeManagement();
+    
+    // Uso el método para crear un nuevo empleado
+    String expectedInsertMessage = instance.newEmployee(102, "Test2", 1.0, "Test2");
+    
+    System.out.println("Flag: " + expectedInsertMessage);
+    
+    // Verifico que el mensaje de inserción sea correcto
+    assertEquals("Empleado contratado y guardado en base de datos.", expectedInsertMessage);
+    
+    // Obtengo la lista de empleados
+    String result = instance.list();
+    
+    // Imprimir el resultado para depuración
+    System.out.println("Flag2: " + result);
+    
+    
+    // Verifico que el resultado contiene los detalles del nuevo empleado
+    assertTrue(result.contains("Código: 102"));
+    assertTrue(result.contains("Nombre: Test2"));
+    assertTrue(result.contains("Salario: 1.0"));
+    assertTrue(result.contains("Departamento: Test2"));
 
+    }
     /**
      * Test of orderCode method, of class EmployeeManagement.
      */
