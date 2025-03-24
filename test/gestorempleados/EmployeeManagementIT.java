@@ -58,32 +58,40 @@ public class EmployeeManagementIT {
     }
 
     /**
-     * Test of salir method, of class EmployeeManagement.
-     */
-    @Test
-    public void testSalir() {
-        System.out.println("salir");
-        EmployeeManagement instance = new EmployeeManagement();
-        instance.salir();
-       
-    }
-
-    /**
      * Test of newEmployee method, of class EmployeeManagement.
      */
     @Test
     public void testNewEmployee() {
         System.out.println("newEmployee");
-        int code = 0;
-        String name = "";
-        double salary = 0.0;
-        String department = "";
+        
+        //Datos del nuevo empleado
+        int code = 101;
+        String name = "Test";
+        double salary = 1.0;
+        String department = "Test";
+        
+        //Creo instancia de EmployeeManagement
         EmployeeManagement instance = new EmployeeManagement();
-        String expResult = "";
+        
+        // Ejecutar el método para agregar empleado
+        String expResult = "Empleado contratado y guardado en base de datos.";
         String result = instance.newEmployee(code, name, salary, department);
+        
+        // Verificar que el método devolvió el mensaje esperado
         assertEquals(expResult, result);
         
-    }
+         //Valido que el empleado realmente se guardó en la base de datos
+         String searchResult = instance.searchEmployee(String.valueOf(code));
+         
+        //El resultado de la búsqueda no debe ser "Empleado no encontrado."
+        assertNotEquals("Empleado no encontrado.", searchResult);
+        
+        //Verifico también que los datos están correctos
+        assertTrue(searchResult.contains("Código: " + code));
+        assertTrue(searchResult.contains("Nombre: " + name));
+        assertTrue(searchResult.contains("Salario: " + salary));
+        assertTrue(searchResult.contains("Departamento: " + department));
+    }  
 
     /**
      * Test of dissmisEmployee method, of class EmployeeManagement.

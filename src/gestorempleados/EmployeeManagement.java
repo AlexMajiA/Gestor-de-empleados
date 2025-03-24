@@ -322,7 +322,6 @@ public class EmployeeManagement {
             }
             
             //Al llamar a resultSet.next(), puedo empezar a consultar directamente con uin Do while.
-            
             do{
                 allResult.append("Código: ").append(resultSet.getInt("code")).append("\n");
                 allResult.append("Nombre: ").append(resultSet.getString("name")).append("\n");
