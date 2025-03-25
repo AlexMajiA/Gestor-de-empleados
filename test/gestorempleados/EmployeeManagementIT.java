@@ -173,13 +173,26 @@ public class EmployeeManagementIT {
      */
     @Test
     public void testOrderCode() throws Exception {
-        System.out.println("orderCode");
-        String order = "";
+        System.out.println("Test orderCode");
+        
+        String order = "Invalido";
+        
         EmployeeManagement instance = new EmployeeManagement();
-        String expResult = "";
+        
+        String expResult = "Error: Opción de ordenación inválida.";
         String result = instance.orderCode(order);
+        
         assertEquals(expResult, result);
-       
+        
+        String orderCode = "Codigo";
+        String expResult2 = "code";
+        String expResult3 = "Código";
+        
+        String result2 = instance.orderCode(orderCode);
+        
+        //Compruebo que al ordenar contenta la palabra Código.
+        assertTrue(result2.contains(expResult3));
+        
     }
 
     /**
