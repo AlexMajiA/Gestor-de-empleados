@@ -200,12 +200,25 @@ public class EmployeeManagementIT {
      */
     @Test
     public void testSearchEmployee() {
-        System.out.println("searchEmployee");
-        String codeConsult = "";
+        System.out.println("Test searchEmployee");
+        
+        String codeConsult = "50";
+        
         EmployeeManagement instance = new EmployeeManagement();
-        String expResult = "";
+        
+        String expResult = "Empleado no encontrado.";
         String result = instance.searchEmployee(codeConsult);
+        
         assertEquals(expResult, result);
+        
+        codeConsult = "3";
+        expResult = "Código";
+        
+        result = instance.searchEmployee(codeConsult);
+        
+        
+        assertTrue(result.contains(expResult));
+        
       
     }
 
